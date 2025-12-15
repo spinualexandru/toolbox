@@ -1,0 +1,7 @@
+modules:
+  toolbox:
+    enabled: true
+  brightness:
+    enabled: true
+  ai:
+    enabled: true

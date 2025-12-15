@@ -1,0 +1,29 @@
+{
+	"dependencies": {
+		"@ai-sdk/google": "^3.0.0-beta.72",
+		"@clack/prompts": "^0.11.0",
+		"ai": "^6.0.0-beta.150",
+		"commander": "^14.0.2",
+		"marked-terminal": "^7.3.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.8",
+		"@types/bun": "latest",
+		"@types/marked-terminal": "^6.1.1"
+	},
+	"module": "index.ts",
+	"name": "toolbox",
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"private": true,
+	"scripts": {
+		"check": "biome check",
+		"dev": "bun run ./index.ts --watch",
+		"format": "biome format",
+		"lint": "biome lint",
+		"start": "bun run index.ts"
+	},
+	"type": "module",
+	"version": "0.1.0"
+}

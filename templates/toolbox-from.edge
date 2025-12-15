@@ -1,0 +1,13 @@
+import { $ } from "bun";
+import { program } from "commander";
+
+program
+	.command("{{name}}")
+	.description("Auto-generated script for {{name}}")
+	.action(async () => {
+		try {
+			await $`{{scriptContent}}`;
+		} catch (error) {
+			console.error("Error executing script:", error);
+		}
+	});

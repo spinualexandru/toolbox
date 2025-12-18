@@ -7,3 +7,5 @@ modules:
     enabled: true
   whois:
     enabled: true
+  completions:
+    enabled: true

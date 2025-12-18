@@ -15,6 +15,7 @@ marked.setOptions({
 const apiKey = process.env.GOOGLE_API_KEY;
 
 const tools = program.command("ai").description("AI-powered tools");
+
 tools
 	.command("chat")
 	.description("Ask questions to the AI model")

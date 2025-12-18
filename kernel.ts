@@ -79,6 +79,7 @@ class Kernel {
 		const modules = Array.from(this.modules.values());
 		const loaded = modules.filter((m) => m.loaded).length;
 		const failed = modules.filter((m) => m.error).length;
+
 		this.Emit("modules:loaded", {
 			failed,
 			loaded,

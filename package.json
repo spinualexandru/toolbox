@@ -1,11 +1,12 @@
 {
 	"dependencies": {
-		"@ai-sdk/google": "^3.0.0-beta.72",
+		"@ai-sdk/google": "^3.0.0-beta.81",
 		"@clack/prompts": "^0.11.0",
 		"@okei/smoldb": "^0.1.0",
-		"ai": "^6.0.0-beta.150",
+		"ai": "^6.0.0-beta.159",
 		"commander": "^14.0.2",
-		"marked-terminal": "^7.3.0"
+		"marked-terminal": "^7.3.0",
+		"ollama-ai-provider-v2": "^1.5.5"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.8",
@@ -15,7 +16,7 @@
 	"module": "index.ts",
 	"name": "toolbox",
 	"peerDependencies": {
-		"typescript": "^5"
+		"typescript": "^5.9.3"
 	},
 	"private": true,
 	"scripts": {

@@ -1,5 +1,5 @@
-import { program } from "commander";
 import { $ } from "bun";
+import { program } from "commander";
 
 const ollamaTool = program
 	.command("ollama")

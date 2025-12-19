@@ -11,3 +11,5 @@ modules:
     enabled: true
   completions:
     enabled: true
+  services:
+    enabled: true

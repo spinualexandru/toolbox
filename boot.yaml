@@ -5,6 +5,8 @@ modules:
     enabled: true
   ai:
     enabled: true
+  ollama:
+    enabled: true
   whois:
     enabled: true
   completions:

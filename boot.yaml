@@ -17,3 +17,7 @@ modules:
     enabled: true
   services:
     enabled: true
+  sbox:
+    enabled: true
+  record:
+    enabled: true

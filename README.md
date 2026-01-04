@@ -2,7 +2,7 @@
 
 A modular CLI toolbox built with Bun and Commander.js. Easily extendable with a plugin-like module system.
 
-Note: Pre-installed modules may require additional system dependencies (e.g., `whois`, `wf-recorder`, `slurp`, `systemd`). The tool was primarily developed for my personal use on Linux, I encourage you to adapt it to your needs.
+Note: Some modules may require additional system dependencies (e.g., `ollama`). The tool was primarily developed for my personal use on Linux, I encourage you to adapt it to your needs.
 
 ## Installation
 
@@ -22,15 +22,11 @@ bun run start [command]
 |---------|-------------|
 | `ai ask [prompt]` | One-shot AI question (supports stdin piping) |
 | `ai chat` | Interactive AI chat session |
-| `brightness <level>` | Set screen brightness (0-600) |
-| `whois [domain]` | WHOIS lookup with interactive REPL mode |
 | `ollama on/off` | Start/stop local Ollama server |
-| `services` | List systemd services (alias: `svc`) |
-| `record` | Record screen region using wf-recorder |
 | `tool add <name>` | Scaffold a new tool module |
 | `tool from <script>` | Create a tool from a Bash script |
 | `edit` | Open toolbox in editor |
-| `install-completions` | Generate fish shell completions |
+| `install-completions` | Generate shell completions |
 
 ### Examples
 
@@ -40,28 +36,13 @@ bun run start ai ask "explain async/await"
 echo "what is rust?" | bun run start ai ask
 bun run start ai chat                   # Interactive mode
 
-# WHOIS lookup
-bun run start whois example.com
-bun run start whois --repl              # Interactive mode
-
-# Systemd services
-bun run start services --active         # Show active services
-bun run start svc --failed              # Show failed services
-bun run start svc --filter docker       # Filter by name
-
-# Screen recording
-bun run start record                    # Select region with slurp
-
-# Screen brightness
-bun run start brightness 300
-
 # Add a new tool
 bun run start tool add mytool
 ```
 
 ## Configuration
 
-Modules are enabled/disabled in `boot.yaml`. Some modules support additional config:
+Built-in modules are enabled/disabled in `boot.yaml`. Some modules support additional config:
 
 ```yaml
 modules:
@@ -69,17 +50,19 @@ modules:
     enabled: true
     provider: google    # or "ollama"
     model: gemini-3-flash-preview
-  whois:
-    enabled: true
 ```
 
 ## Adding New Modules
 
-1. Create a file in `modules/` (e.g., `modules/mytool.ts`)
-2. Register commands using Commander:
+### User Modules (Recommended)
+
+User modules are auto-discovered from `~/.config/toolbox/modules/` (or `$XDG_CONFIG_HOME/toolbox/modules/`). No configuration needed.
+
+1. Create a file (e.g., `~/.config/toolbox/modules/mytool.ts`)
+2. Register commands using the global program:
 
 ```typescript
-import { program } from "commander";
+const program = (globalThis as Record<string, unknown>).toolboxProgram as typeof import("commander").program;
 
 program
   .command("mytool")
@@ -89,7 +72,17 @@ program
   });
 ```
 
-3. Enable it in `boot.yaml`:
+Supports both `mytool.ts` and `mytool/index.ts` patterns.
+
+### Built-in Modules
+
+For modules shipped with the toolbox, create a file in `modules/` and enable it in `boot.yaml`:
+
+```typescript
+import { program } from "commander";
+
+program.command("mytool").action(async () => { /* ... */ });
+```
 
 ```yaml
 modules:

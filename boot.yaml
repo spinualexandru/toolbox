@@ -1,8 +1,6 @@
 modules:
   toolbox:
     enabled: true
-  brightness:
-    enabled: true
   ai:
     enabled: true
     #provider: google
@@ -11,13 +9,5 @@ modules:
     model: gpt-oss:120b-cloud
   ollama:
     enabled: true
-  whois:
-    enabled: true
   completions:
-    enabled: true
-  services:
-    enabled: true
-  sbox:
-    enabled: true
-  record:
     enabled: true

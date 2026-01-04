@@ -1,6 +1,7 @@
 import { $ } from "bun";
 
-const program = (globalThis as Record<string, unknown>).toolboxProgram as typeof import("commander").program;
+const program = (globalThis as Record<string, unknown>)
+	.toolkProgram as typeof import("commander").program;
 
 program
 	.command("record")

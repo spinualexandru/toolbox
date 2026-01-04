@@ -30,8 +30,8 @@ class Kernel {
 
 	public Boot() {
 		program
-			.name("toolbox")
-			.description("A CLI toolbox for various utilities")
+			.name("toolk")
+			.description("A modular CLI toolkit")
 			.version(pkg.version);
 	}
 
@@ -39,7 +39,7 @@ class Kernel {
 		const xdgConfigHome = process.env.XDG_CONFIG_HOME;
 		const homeDir = process.env.HOME ?? "";
 		const configBase = xdgConfigHome ?? `${homeDir}/.config`;
-		return `${configBase}/toolbox/modules`;
+		return `${configBase}/toolk/modules`;
 	}
 
 	private async DiscoverUserModules(): Promise<Map<string, string>> {
@@ -148,7 +148,7 @@ class Kernel {
 		const userModules = await this.DiscoverUserModules();
 
 		// Expose program globally for user modules
-		(globalThis as Record<string, unknown>).toolboxProgram = program;
+		(globalThis as Record<string, unknown>).toolkProgram = program;
 
 		for (const [name, absolutePath] of userModules) {
 			if (this.modules.has(name)) {

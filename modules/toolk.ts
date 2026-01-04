@@ -4,10 +4,10 @@ import { program } from "commander";
 
 program
 	.command("edit")
-	.description("Opens the toolbox in the editor")
+	.description("Opens toolk in the editor")
 	.action(async () => {
 		try {
-			await $`zeditor ~/Experiments/toolbox-cli`;
+			await $`zeditor ~/Work/toolbox`;
 		} catch (error) {
 			console.error(`${error instanceof Error ? error.message : ""}`);
 			process.exit(1);
@@ -18,7 +18,7 @@ const tools = program.command("tool");
 
 tools
 	.command("add")
-	.description("Add a new tool to the toolbox")
+	.description("Add a new tool to toolk")
 	.argument("<name>", "Name of the new tool")
 	.action(async (name: string) => {
 		if (!name || !/^[a-z][a-z0-9-]*$/i.test(name)) {
@@ -27,7 +27,7 @@ tools
 		}
 
 		const filePath = `${import.meta.dir}/${name}.ts`;
-		const template = await withTemplate("toolbox-from", {
+		const template = await withTemplate("toolk-from", {
 			name,
 			scriptContent: "echo 'Hello, World!';",
 		});
@@ -58,7 +58,7 @@ tools
 
 		try {
 			const scriptContent = await Bun.file(scriptPath).text();
-			const template = await withTemplate("toolbox-from", {
+			const template = await withTemplate("toolk-from", {
 				name: options.name,
 				scriptContent,
 			});

@@ -13,12 +13,15 @@
 		"@types/bun": "latest",
 		"@types/marked-terminal": "^6.1.1"
 	},
+	"bin": {
+		"toolk": "./index.ts"
+	},
 	"module": "index.ts",
-	"name": "toolbox",
+	"name": "toolk",
 	"peerDependencies": {
 		"typescript": "^5.9.3"
 	},
-	"private": true,
+	"private": false,
 	"scripts": {
 		"check": "biome check",
 		"dev": "bun run ./index.ts --watch",
@@ -27,5 +30,5 @@
 		"start": "bun run index.ts"
 	},
 	"type": "module",
-	"version": "0.1.0"
+	"version": "0.1.1"
 }

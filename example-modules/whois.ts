@@ -1,4 +1,5 @@
-const program = (globalThis as Record<string, unknown>).toolboxProgram as typeof import("commander").program;
+const program = (globalThis as Record<string, unknown>)
+	.toolkProgram as typeof import("commander").program;
 
 async function whoisQuery(server: string, query: string): Promise<string> {
 	return new Promise((resolve, reject) => {

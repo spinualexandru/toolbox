@@ -1,22 +1,22 @@
-# toolbox
+# toolk
 
-A modular CLI toolbox built with Bun and Commander.js. Easily extendable with a plugin-like module system.
+A modular CLI toolkit built with Bun and Commander.js. Easily extendable with a plugin-like module system.
 
 Note: Some modules may require additional system dependencies (e.g., `ollama`). The tool was primarily developed for my personal use on Linux, I encourage you to adapt it to your needs.
 
 ## Installation
 
 ```bash
-bun install
+bun install toolk -g
 ```
 
 ## Usage
 
 ```bash
-bun run start [command]
+toolk [command] --help
 ```
 
-### Available Commands
+### Available Commands (Built-in)
 
 | Command | Description |
 |---------|-------------|
@@ -25,7 +25,7 @@ bun run start [command]
 | `ollama on/off` | Start/stop local Ollama server |
 | `tool add <name>` | Scaffold a new tool module |
 | `tool from <script>` | Create a tool from a Bash script |
-| `edit` | Open toolbox in editor |
+| `edit` | Open toolk in editor |
 | `install-completions` | Generate shell completions |
 
 ### Examples
@@ -56,13 +56,13 @@ modules:
 
 ### User Modules (Recommended)
 
-User modules are auto-discovered from `~/.config/toolbox/modules/` (or `$XDG_CONFIG_HOME/toolbox/modules/`). No configuration needed.
+User modules are auto-discovered from `~/.config/toolk/modules/` (or `$XDG_CONFIG_HOME/toolk/modules/`). No configuration needed.
 
-1. Create a file (e.g., `~/.config/toolbox/modules/mytool.ts`)
+1. Create a file (e.g., `~/.config/toolk/modules/mytool.ts`)
 2. Register commands using the global program:
 
 ```typescript
-const program = (globalThis as Record<string, unknown>).toolboxProgram as typeof import("commander").program;
+const program = (globalThis as Record<string, unknown>).toolkProgram as typeof import("commander").program;
 
 program
   .command("mytool")
@@ -76,7 +76,7 @@ Supports both `mytool.ts` and `mytool/index.ts` patterns.
 
 ### Built-in Modules
 
-For modules shipped with the toolbox, create a file in `modules/` and enable it in `boot.yaml`:
+For modules shipped with toolk, create a file in `modules/` and enable it in `boot.yaml`:
 
 ```typescript
 import { program } from "commander";

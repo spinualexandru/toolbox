@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import { log } from "@lib/logger";
 import Kernel from "./kernel";
 

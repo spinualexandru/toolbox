@@ -1,5 +1,5 @@
 modules:
-  toolbox:
+  toolk:
     enabled: true
   ai:
     enabled: true

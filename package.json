@@ -1,15 +1,15 @@
 {
 	"dependencies": {
-		"@ai-sdk/google": "^3.0.0-beta.81",
+		"@ai-sdk/google": "^3.0.3",
 		"@clack/prompts": "^0.11.0",
-		"@okei/smoldb": "^0.1.0",
-		"ai": "^6.0.0-beta.159",
+		"@okei/smoldb": "^0.1.1",
+		"ai": "^6.0.9",
 		"commander": "^14.0.2",
 		"marked-terminal": "^7.3.0",
-		"ollama-ai-provider-v2": "^1.5.5"
+		"ollama-ai-provider-v2": "^2.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.8",
+		"@biomejs/biome": "^2.3.11",
 		"@types/bun": "latest",
 		"@types/marked-terminal": "^6.1.1"
 	},
@@ -30,5 +30,5 @@
 		"start": "bun run index.ts"
 	},
 	"type": "module",
-	"version": "0.1.1"
+	"version": "0.1.2"
 }

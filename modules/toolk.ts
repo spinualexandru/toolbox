@@ -2,18 +2,6 @@ import { withTemplate } from "@lib/template";
 import { $ } from "bun";
 import { program } from "commander";
 
-program
-	.command("edit")
-	.description("Opens toolk in the editor")
-	.action(async () => {
-		try {
-			await $`zeditor ~/Work/toolbox`;
-		} catch (error) {
-			console.error(`${error instanceof Error ? error.message : ""}`);
-			process.exit(1);
-		}
-	});
-
 const tools = program.command("tool");
 
 tools

@@ -2,6 +2,9 @@
 import { log } from "@lib/logger";
 import Kernel from "./kernel";
 
+import { program as commanderProgram } from "commander";
+export const program = commanderProgram;
+
 Kernel.Boot();
 
 Kernel.Listen("modules:loaded", (data) => {

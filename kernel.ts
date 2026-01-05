@@ -1,6 +1,5 @@
 import type { PathLike } from "bun";
 import { program } from "commander";
-import BootConfig from "./boot.yaml";
 import pkg from "./package.json";
 
 interface ModuleState {
@@ -16,6 +15,10 @@ interface ModuleConfig {
 	enabled: boolean;
 }
 
+interface BootConfig {
+	modules: Record<string, ModuleConfig>;
+}
+
 interface KernelEvents {
 	"modules:loaded": { total: number; loaded: number; failed: number };
 }
@@ -27,6 +30,7 @@ class Kernel {
 	readonly _BOOT_TIME = new Date();
 	private modules = new Map<string, ModuleState>();
 	private eventBus = new Map<string, EventCallback<unknown>[]>();
+	private bootConfig: BootConfig = { modules: {} };
 
 	public Boot() {
 		program
@@ -35,11 +39,26 @@ class Kernel {
 			.version(pkg.version);
 	}
 
-	private GetUserModulesDir(): string {
+	private GetConfigDir(): string {
 		const xdgConfigHome = process.env.XDG_CONFIG_HOME;
 		const homeDir = process.env.HOME ?? "";
 		const configBase = xdgConfigHome ?? `${homeDir}/.config`;
-		return `${configBase}/toolk/modules`;
+		return `${configBase}/toolk`;
+	}
+
+	private GetUserModulesDir(): string {
+		return `${this.GetConfigDir()}/modules`;
+	}
+
+	private async LoadBootConfig(): Promise<void> {
+		const configPath = `${this.GetConfigDir()}/boot.yaml`;
+		try {
+			const config = await import(configPath);
+			this.bootConfig = config.default as BootConfig;
+		} catch {
+			// Config doesn't exist or isn't readable - use defaults
+			this.bootConfig = { modules: {} };
+		}
 	}
 
 	private async DiscoverUserModules(): Promise<Map<string, string>> {
@@ -167,10 +186,14 @@ class Kernel {
 	}
 
 	async ProbeModules() {
-		for (const [name, config] of Object.entries(BootConfig.modules) as [
-			string,
-			ModuleConfig,
-		][]) {
+		await this.LoadBootConfig();
+
+		// Expose boot config globally for modules
+		(globalThis as Record<string, unknown>).toolkBootConfig = this.bootConfig;
+
+		for (const [name, config] of Object.entries(
+			this.bootConfig.modules ?? {},
+		) as [string, ModuleConfig][]) {
 			if (config?.enabled !== false) {
 				// Default to enabled
 				await this.RegisterModule(name, config);

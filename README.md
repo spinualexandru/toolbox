@@ -42,7 +42,7 @@ bun run start tool add mytool
 
 ## Configuration
 
-Built-in modules are enabled/disabled in `boot.yaml`. Some modules support additional config:
+Configuration is stored in `~/.config/toolk/boot.yaml` (or `$XDG_CONFIG_HOME/toolk/boot.yaml`). Built-in modules are enabled/disabled here, and some support additional config:
 
 ```yaml
 modules:
@@ -76,7 +76,7 @@ Supports both `mytool.ts` and `mytool/index.ts` patterns.
 
 ### Built-in Modules
 
-For modules shipped with toolk, create a file in `modules/` and enable it in `boot.yaml`:
+For modules shipped with toolk, create a file in `modules/` and enable it in `~/.config/toolk/boot.yaml`:
 
 ```typescript
 import { program } from "commander";

@@ -8,7 +8,10 @@ import { program } from "commander";
 import { marked } from "marked";
 import TerminalRenderer from "marked-terminal";
 import { createOllama } from "ollama-ai-provider-v2";
-import BootConfig from "../boot.yaml";
+
+const BootConfig = (globalThis as Record<string, unknown>).toolkBootConfig as {
+	modules?: Record<string, unknown>;
+};
 
 // Suppress AI SDK warnings
 (globalThis as { AI_SDK_LOG_WARNINGS?: boolean }).AI_SDK_LOG_WARNINGS = false;

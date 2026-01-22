@@ -1,5 +1,5 @@
 import { cancel, intro, isCancel, outro, spinner, text } from "@clack/prompts";
-import { log } from "@lib/logger";
+import { log } from "../../../lib/logger";
 import { generateText } from "ai";
 import { getConfig } from "../lib/config";
 import { displayModels } from "../lib/display";
@@ -16,7 +16,7 @@ export async function handleChat(_options: unknown, command: unknown) {
 		).parent?.opts() ?? {};
 
 	const config = getConfig();
-	let provider: Provider = parentOpts.provider ?? config.provider;
+	let provider: Provider = (parentOpts.provider as Provider) ?? config.provider;
 	let currentModelName = parentOpts.model ?? config.model;
 	let model = createModel(provider, currentModelName);
 	const cols = await getTerminalWidth();

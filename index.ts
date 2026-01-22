@@ -1,11 +1,19 @@
 #!/usr/bin/env bun
 import { log } from "@lib/logger";
+import { program as commanderProgram } from "commander";
 import Kernel from "./kernel";
 
-import { program as commanderProgram } from "commander";
+// Static imports to ensure built-in modules are bundled
+import "./modules/ai";
+import "./modules/toolk";
+import "ai";
 export const program = commanderProgram;
 
 Kernel.Boot();
+
+// Mark statically imported modules as loaded
+Kernel.MarkAsLoaded("ai");
+Kernel.MarkAsLoaded("toolk");
 
 Kernel.Listen("modules:loaded", (data) => {
 	log(`[Kernel] ${data.loaded}/${data.total} modules loaded.`, "green");
@@ -15,6 +23,6 @@ Kernel.Listen("modules:loaded", (data) => {
 	log(`[Kernel] Uptime: ${Kernel.Uptime}ms`, "green");
 });
 
-await Kernel.ProbeModules();
-
-Kernel.Process();
+Kernel.ProbeModules().then(() => {
+	Kernel.Process();
+});

@@ -1,6 +1,7 @@
 import { program } from "commander";
 import { handleAsk } from "./commands/ask";
 import { handleChat } from "./commands/chat";
+import { handleJsonToType } from "./commands/json-to-type";
 
 const ai = program
 	.command("ai")
@@ -16,3 +17,8 @@ ai.command("ask")
 ai.command("chat")
 	.description("Start an interactive conversation with the AI")
 	.action(handleChat);
+
+ai.command("json-to-type")
+	.description("Convert JSON to TypeScript types")
+	.argument("[json...]", "JSON to convert (or pipe via stdin)")
+	.action(handleJsonToType);

@@ -3,10 +3,10 @@
 		"toolk": "./index.ts"
 	},
 	"dependencies": {
-		"@ai-sdk/google": "^3.0.3",
+		"@ai-sdk/google": "^3.0.10",
 		"@clack/prompts": "^0.11.0",
 		"@okei/smoldb": "^0.1.1",
-		"ai": "^6.0.9",
+		"ai": "^6.0.45",
 		"commander": "^14.0.2",
 		"marked-terminal": "^7.3.0",
 		"ollama-ai-provider-v2": "^2.0.0"
@@ -19,10 +19,11 @@
 	"module": "index.ts",
 	"name": "toolk",
 	"peerDependencies": {
-		"typescript": "^5.9.3"
+		"typescript": "next"
 	},
 	"private": false,
 	"scripts": {
+		"build": "bun run build.ts",
 		"check": "biome check",
 		"dev": "bun run ./index.ts --watch",
 		"format": "biome format",
@@ -30,5 +31,5 @@
 		"start": "bun run index.ts"
 	},
 	"type": "module",
-	"version": "0.1.3"
+	"version": "0.1.4"
 }

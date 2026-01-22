@@ -1,9 +1,10 @@
-import { log } from "@lib/logger";
-import { readStdin } from "@lib/stdin";
+import { log } from "../../../lib/logger";
+import { readStdin } from "../../../lib/stdin";
 import { generateText } from "ai";
 import { getConfig } from "../lib/config";
 import { getSystemPrompt, getTerminalWidth, marked } from "../lib/terminal";
 import { createModel } from "../providers/factory";
+import type { Provider } from "../types";
 
 export async function handleAsk(
 	prompt: string[] = [],
@@ -18,7 +19,8 @@ export async function handleAsk(
 		).parent?.opts() ?? {};
 
 	const config = getConfig();
-	const provider = parentOpts.provider ?? config.provider;
+	const provider: Provider =
+		(parentOpts.provider as Provider) ?? config.provider;
 	const modelName = parentOpts.model ?? config.model;
 	const model = createModel(provider, modelName);
 

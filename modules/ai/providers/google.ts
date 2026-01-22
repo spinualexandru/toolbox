@@ -1,5 +1,5 @@
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { log } from "@lib/logger";
+import { log } from "../../../lib/logger";
 
 export const GOOGLE_MODELS = [
 	"gemini-3-pro-preview",

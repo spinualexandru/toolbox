@@ -1,4 +1,4 @@
-import { withTemplate } from "@lib/template";
+import { withTemplate } from "../../../lib/template";
 import { getToolFilePath, validateToolName } from "../lib/validation";
 
 export async function handleFrom(
@@ -15,7 +15,7 @@ export async function handleFrom(
 	try {
 		const scriptContent = await Bun.file(scriptPath).text();
 		const template = await withTemplate("toolk-from", {
-			name: options.name,
+			name: options.name!,
 			scriptContent,
 		});
 		await Bun.write(filePath, template);

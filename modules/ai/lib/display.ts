@@ -1,4 +1,4 @@
-import { log } from "@lib/logger";
+import { log } from "../../../lib/logger";
 import { GOOGLE_MODELS } from "../providers/google";
 import { fetchOllamaModels } from "../providers/ollama";
 

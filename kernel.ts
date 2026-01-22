@@ -39,6 +39,17 @@ class Kernel {
 			.version(pkg.version);
 	}
 
+	// Mark a module as statically loaded (for bundled builds)
+	public MarkAsLoaded(name: string): void {
+		this.modules.set(name, {
+			config: { enabled: true },
+			id: name,
+			loaded: true,
+			path: `./modules/${name}`,
+			source: "builtin",
+		});
+	}
+
 	private GetConfigDir(): string {
 		const xdgConfigHome = process.env.XDG_CONFIG_HOME;
 		const homeDir = process.env.HOME ?? "";
@@ -134,6 +145,12 @@ class Kernel {
 		name: string,
 		config: ModuleConfig,
 	): Promise<boolean> {
+		// Skip if already loaded via static import
+		const existing = this.modules.get(name);
+		if (existing?.loaded) {
+			return true;
+		}
+
 		const modulePath = `./modules/${name}`;
 		this.modules.set(name, {
 			config,

@@ -1,4 +1,4 @@
-import { withTemplate } from "@lib/template";
+import { withTemplate } from "../../../lib/template";
 import { $ } from "bun";
 import { getToolFilePath, validateToolName } from "../lib/validation";
 
